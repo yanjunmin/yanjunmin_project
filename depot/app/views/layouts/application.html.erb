@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Pragprog Books Online Store</title>
+  <%= stylesheet_link_tag "scaffolds"%>
+  <%= stylesheet_link_tag "depot", :media => "all"%>
+  <%= stylesheet_link_tag "bootstrap.min", :media => "all"%>
+  <%= javascript_include_tag :application %>
+  <%= javascript_include_tag "bootstrap.min" %>
+  <%= csrf_meta_tags %>
+</head>
+<body id="store">
+	<div id="banner">
+		<%= image_tag("logo.png")%>
+		<%= @page_title || "Pragmatic Bookshelf"%>
+	</div>
+	<div id="columns">
+		<div id="side">
+			<div id="cart">
+				<% if @cart %>
+					<% #hidden_div_if(@cart.line_items.empty?, :id => "cart") do %>
+	 				<%= render @cart %>
+ 					<% #end %>
+				<% end %>
+
+			</div>
+			<ul class="nav nav-pills nav-stacked">
+			<li class="active"><a href="#">Home</a></li>
+			<li><a href="#">Questions</a></li>
+			<li><a href="#">News</a></li> 
+			<li><a href="#">Contact</a></li> 
+			<li><a href="#">Java</a></li>
+			<li><a href="#">Ruby</a></li>
+		</ul>
+		</div>
+		
+		<div id = "main">
+			<%= yield %>
+		</div>
+
+	</div>
+</body>
+</html>
