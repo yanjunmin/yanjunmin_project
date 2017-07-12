@@ -6,7 +6,7 @@ class Notifier < ActionMailer::Base
   #
   #   en.notifier.order_receive.subject
   #
-  def order_receive(order)
+  def order_received(order)
     @order = order
 
     mail :to => "order.email", :subject => "Pragmatic Store Order Confirmation"
