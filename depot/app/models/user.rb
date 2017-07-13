@@ -1,13 +1,13 @@
 require "digest/sha2"
 class User < ActiveRecord::Base
-	validates :name, :presence => true, :uniqueness => true
+    validates :name, :presence => true, :uniqueness => true
 
-	validates :password, :confirmation => true
-	attr_accessor :password_confirmation
-	attr_reader	  :password
-	validate :password_must_be_present
+    validates :password, :confirmation => true
+    attr_accessor :password_confirmation
+    attr_reader	  :password
+    validate :password_must_be_present
 
-  	attr_accessible :hashed_password, :name, :salt, :password, :password_confirmation
+    attr_accessible :hashed_password, :name, :salt, :password, :password_confirmation
 
   	def User.authenticate(name, password)
   		if user = find_by_name(name)
@@ -38,5 +38,13 @@ class User < ActiveRecord::Base
   	def generate_salt
   		self.salt = self.object_id.to_s + rand.to_s
   	end
+
+    after_destroy :ensure_an_admin_remains
+
+    def ensure_an_admin_remains
+      if User.count.zero?
+        rails "Cant't delete last user"
+      end
+    end
 
 end
