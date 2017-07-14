@@ -19,9 +19,9 @@ group :assets do
   gem 'uglifier', '>= 1.0.3'
 end
 #添加mysql的gem
-group :production do
-	gem "mysql"
-end
+#group :production do
+#	gem "mysql"
+#end
 
 gem 'therubyracer',  platforms: :ruby
 gem 'jquery-rails'
